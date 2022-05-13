@@ -6,7 +6,7 @@ these functions (and more from PostgreSQL) in Go.
 
 ## Example
 
-```
+```go
 package main
 
 import (
@@ -36,21 +36,18 @@ func main() {
 
 ### Regexp
 
-* regexp
+* regexp: `x REGEXP '[a-z]+$'` (uses Go's regexp, not PCRE)
 
 ### Strings
 
-* repeat
-* replicate
-* strpos
-* charindex
-* ltrim
-* rtrim
-* trim
-* replace
-* reverse
-* lpad
-* rpad
+* repeat, replicate: `repeat(string, ntimes)`
+* strpos, charindex: `strpos(needle, haystack)`
+* trim, ltrim: `ltrim('abccbad', 'abc') = 'd'`
+* rtrim: `rtrim('abccbad', 'd') = 'abccbad'`
+* replace: `replace(string, what, with)`
+* reverse: `reverse(string)`
+* lpad: `lpad(string, length, what = ' ')`
+* rpad: `rpad(string, length, what = ' ')`
 
 ### Math
 
