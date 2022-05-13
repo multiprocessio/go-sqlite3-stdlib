@@ -49,3 +49,11 @@ func Test_ext_trunc(t *testing.T) {
 	assertQuery(t, "SELECT trunc(0.49999)", "0")
 	assertQuery(t, "SELECT trunc(-0.49999)", "0")
 }
+
+func Test_floor(t *testing.T) {
+	assertQueryPrepare(t, []string{
+		"CREATE TABLE x (n INT)",
+		"INSERT INTO x VALUES (2)",
+		"SELECT floor(n) FROM x",
+	}, "2")
+}
