@@ -1,14 +1,18 @@
-package runner
+package stdlib
 
 import (
 	"regexp"
 )
 
 func ext_regexp(re, s string) bool {
-	matched, err := regexp.MatchString(re, s)
+	c, err := regexp.Compile(re)
 	if err != nil {
 		return false
 	}
 
-	return matched
+	return c.MatchString(s)
+}
+
+var regexpFunctions = map[string]any{
+	"regexp": ext_regexp,
 }
