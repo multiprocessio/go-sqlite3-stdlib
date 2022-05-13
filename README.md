@@ -6,7 +6,7 @@ these functions (and more from PostgreSQL) in Go.
 
 ## Example
 
-```
+```go
 package main
 
 import (
