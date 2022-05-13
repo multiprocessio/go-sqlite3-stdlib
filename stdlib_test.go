@@ -6,6 +6,7 @@ import (
 	"testing"
 )
 
+// SOURCE: https://stackoverflow.com/a/50123125/1507139
 func TestMain(m *testing.M) {
 	rc := m.Run()
 
