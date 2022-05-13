@@ -1,0 +1,64 @@
+name: Run tests
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    if: github.event_name == 'pull_request'
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: ${{ github.ref }}
+
+    - run: ./scripts/ci/prepare_linux.sh
+    - run: go test -race -cover
+    - run: gofmt -w -s .
+    - run: ./scripts/fail_on_diff.sh
+
+  dsq-tests-ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: ${{ github.ref }}
+
+    - run: ./scripts/ci/prepare_linux.sh
+    - run: go build
+    - run: ./scripts/test.py
+
+  dsq-tests-windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: ${{ github.ref }}
+
+    - run: ./scripts/ci/prepare_windows.ps1
+      shell: pwsh
+    - run: go build
+    - run: ./scripts/test.py
+      shell: bash
+
+    # Subtle behavioral differences between powershell/cmd and bash. For example nested double quotes must be escaped.
+    - run: python3 ./scripts/test.py
+      shell: powershell
+    - run: python3 ./scripts/test.py
+      shell: cmd
+
+  dsq-tests-macos:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: ${{ github.ref }}
+
+    - run: ./scripts/ci/prepare_macos.sh
+    - run: go build
+    - run: ./scripts/test.py

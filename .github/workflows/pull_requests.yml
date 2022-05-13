@@ -1,0 +1,57 @@
+name: Run tests
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    if: github.event_name == 'pull_request'
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: ${{ github.ref }}
+
+    - run: ./scripts/ci/prepare_linux.sh
+    - run: go test -race -cover
+    - run: gofmt -w -s .
+    - run: ./scripts/fail_on_diff.sh
+
+  tests-ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: ${{ github.ref }}
+
+    - run: ./scripts/ci/prepare_linux.sh
+    - run: go build
+    - run: go test -race -cover
+
+  tests-windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: ${{ github.ref }}
+
+    - run: ./scripts/ci/prepare_windows.ps1
+      shell: pwsh
+    - run: go build
+    - run: go test -race -cover
+
+  tests-macos:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: ${{ github.ref }}
+
+    - run: ./scripts/ci/prepare_macos.sh
+    - run: go build
+    - run: go test -race -cover
