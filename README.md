@@ -1,8 +1,10 @@
 # A standard library for mattn/go-sqlite3
 
-As an alternative to compiling C extensions like extension-functions.c
-and sqlean into mattn/go-sqlite3, this package implements many of
-these functions (and more from PostgreSQL) in Go.
+As an alternative to compiling C extensions like
+[extension-functions.c](https://www.sqlite.org/contrib) and
+[sqlean](https://github.com/nalgeon/sqlean) into
+[mattn/go-sqlite3](https://github.com/mattn/go-sqlite3), this package
+implements many of these functions (and more from PostgreSQL) in Go.
 
 ## Example
 
