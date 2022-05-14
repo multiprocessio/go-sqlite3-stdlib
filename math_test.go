@@ -35,15 +35,56 @@ func assertQuery(t *testing.T, query string, res string) {
 	assertQueryPrepare(t, []string{query}, res)
 }
 
-func Test_ext_acos(t *testing.T) {
+func Test_floaty(t *testing.T) {
+	tests := []struct {
+		in  any
+		out float64
+	}{
+		{"0.1", 0.1},
+		{"sdflkj", 0},
+		{12, 12.0},
+		{nil, 0},
+		{int8(1), 1},
+		{int16(1), 1},
+		{int32(1), 1},
+		{int64(1), 1},
+		{uint(1), 1},
+		{uint16(1), 1},
+		{uint32(1), 1},
+		{uint64(1), 1},
+		{float32(1), 1},
+	}
+
+	for _, test := range tests {
+		assert.Equal(t, test.out, floaty(test.in))
+	}
+}
+
+func Test_acos(t *testing.T) {
 	assertQuery(t, "SELECT acos(0.1)", "1.4706289056333368")
 }
 
-func Test_ext_acosh(t *testing.T) {
+func Test_radians(t *testing.T) {
+	assertQuery(t, "SELECT radians(180)", "3.141592653589793")
+}
+
+func Test_degrees(t *testing.T) {
+	assertQuery(t, "SELECT degrees(3.141592653589793)", "180")
+}
+
+func Test_mod(t *testing.T) {
+	assertQuery(t, "SELECT mod('10', '2')", "0")
+}
+
+func Test_pi(t *testing.T) {
+	assertQuery(t, "SELECT pi()", "3.141592653589793")
+}
+
+func Test_acosh(t *testing.T) {
 	assertQuery(t, "SELECT acosh(2.0)", "1.3169578969248166")
 }
 
-func Test_ext_trunc(t *testing.T) {
+func Test_trunc(t *testing.T) {
 	assertQuery(t, "SELECT trunc(10.4)", "10")
 	assertQuery(t, "SELECT trunc(-10.9)", "-10")
 	assertQuery(t, "SELECT trunc(0.49999)", "0")

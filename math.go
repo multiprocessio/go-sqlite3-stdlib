@@ -1,6 +1,9 @@
 package stdlib
 
-import "math"
+import (
+	"math"
+	"strconv"
+)
 
 func floaty(a any) float64 {
 	switch t := a.(type) {
@@ -26,6 +29,9 @@ func floaty(a any) float64 {
 		return float64(t)
 	case uint64:
 		return float64(t)
+	case string:
+		s, _ := strconv.ParseFloat(t, 64)
+		return s
 	default:
 		return 0.0
 	}
