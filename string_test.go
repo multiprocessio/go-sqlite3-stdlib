@@ -190,3 +190,11 @@ func Test_ext_rpad(t *testing.T) {
 	// Test no 3rd argument variant
 	assertQuery(t, "SELECT rpad('22', 3, '0');", "220")
 }
+
+func Test_ext_upper(t *testing.T) {
+	assertQuery(t, "SELECT upper('wHaT3vEr')", "WHAT3VER")
+}
+
+func Test_ext_lower(t *testing.T) {
+	assertQuery(t, "SELECT lower('wHaT3vEr')", "what3ver")
+}

@@ -50,6 +50,8 @@ func main() {
 * reverse: `reverse(string)`
 * lpad: `lpad(string, length, what = ' ')`
 * rpad: `rpad(string, length, what = ' ')`
+* upper: `upper(string)`
+* lower: `lower(string)`
 
 ### Math
 

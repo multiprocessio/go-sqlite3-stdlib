@@ -115,4 +115,6 @@ var stringFunctions = map[string]any{
 	"reverse":   ext_reverse,
 	"lpad":      ext_lpad,
 	"rpad":      ext_rpad,
+	"upper":     strings.ToUpper,
+	"lower":     strings.ToLower,
 }
