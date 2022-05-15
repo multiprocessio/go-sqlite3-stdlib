@@ -77,6 +77,6 @@ func Test_percentile(t *testing.T) {
 	assertQueryPrepare(t, []string{
 		"CREATE TABLE x (n INT)",
 		"INSERT INTO x VALUES (5), (2), (4)",
-		"SELECT perc_75(n) FROM x",
+		"SELECT perc(n, 75) FROM x",
 	}, "5")
 }

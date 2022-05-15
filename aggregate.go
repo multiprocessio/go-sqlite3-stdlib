@@ -44,7 +44,7 @@ func (s *stddev) Step(x any) {
 }
 
 func (s *stddev) Done() float64 {
-	return stat.StdDev(s.xs, nil)
+	return stat.PopStdDev(s.xs, nil)
 }
 
 type percentile struct {
