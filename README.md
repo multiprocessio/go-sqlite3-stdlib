@@ -66,11 +66,11 @@ func main() {
 | Name(s) | Notes | Example |
 | ------------------------ | ---- | --- |
 | url_scheme | |  `url_scheme('https://x.com:90/home.html') = 'https'` |
-* url_host | |  `url_host('https://x.com:90/home.html') = 'x.com:90'` |
-* url_port | |  `url_port('https://x.com:90/home.html') = '90'` |
-* url_path | | `url_path('https://x.com/some/path.html?p=123') = '/some/path.html'` | 
-* url_param | | `url_param('https://x.com/home.html?p=123&z=%5B1%2C2%5D#section-1', 'z') = '[1,2]'` |
-* url_fragment | | `url_fragment('https://x.com/home.html?p=123&z=%5B1%2C2%5D#section-1') = 'section-1'` |
+| url_host | | `url_host('https://x.com:90/home.html') = 'x.com:90'` |
+| url_port | | `url_port('https://x.com:90/home.html') = '90'` |
+| url_path | | `url_path('https://x.com/some/path.html?p=123') = '/some/path.html'` | 
+| url_param | | `url_param('https://x.com/home.html?p=123&z=%5B1%2C2%5D#section-1', 'z') = '[1,2]'` |
+| url_fragment | | `url_fragment('https://x.com/home.html?p=123&z=%5B1%2C2%5D#section-1') = 'section-1'` |
 
 ### Date
 
