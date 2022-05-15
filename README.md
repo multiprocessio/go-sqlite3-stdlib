@@ -83,4 +83,6 @@ func main() {
 ### Aggregate
 
 * stddev, stdev, stddev_pop
-* mode (for integers), modestr (for strings)
+* mode
+* median
+* range
