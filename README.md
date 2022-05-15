@@ -85,4 +85,3 @@ func main() {
 * stddev, stdev, stddev_pop
 * mode
 * median
-* range
