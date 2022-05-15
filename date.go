@@ -33,7 +33,6 @@ func dateDay(s string) int64 {
 	return int64(t.Day())
 }
 
-
 func dateYearDay(s string) int64 {
 	t, err := dateparse.ParseAny(s)
 	if err != nil {
@@ -89,13 +88,13 @@ func dateRfc3339(s string) string {
 }
 
 var dateFunctions = map[string]any{
-	"date_year": stringy1int64(dateYear),
-	"date_month": stringy1int64(dateMonth),
-	"date_day": stringy1int64(dateDay),
+	"date_year":    stringy1int64(dateYear),
+	"date_month":   stringy1int64(dateMonth),
+	"date_day":     stringy1int64(dateDay),
 	"date_yearday": stringy1int64(dateYearDay),
-	"date_hour": stringy1int64(dateHour),
-	"date_minute": stringy1int64(dateMinute),
-	"date_second": stringy1int64(dateSecond),
-	"date_unix": stringy1int64(dateUnix),
+	"date_hour":    stringy1int64(dateHour),
+	"date_minute":  stringy1int64(dateMinute),
+	"date_second":  stringy1int64(dateSecond),
+	"date_unix":    stringy1int64(dateUnix),
 	"date_rfc3339": stringy1string(dateRfc3339),
 }

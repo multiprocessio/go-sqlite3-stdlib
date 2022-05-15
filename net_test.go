@@ -7,8 +7,8 @@ import (
 
 func Test_url(t *testing.T) {
 	url := "https://x.com:90/some/path.html?p=123&z=%5B1%2C2%5D#section-1"
-	tests := []struct{
-		fn string
+	tests := []struct {
+		fn  string
 		out string
 	}{
 		{"url_scheme", "https"},

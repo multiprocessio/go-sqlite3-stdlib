@@ -50,7 +50,7 @@ func (s *stddev) Done() float64 {
 type percentile struct {
 	xs         []float64
 	percentile float64
-	kind stat.CumulantKind
+	kind       stat.CumulantKind
 }
 
 func newPercentile() *percentile {
@@ -201,25 +201,25 @@ func (m *median) Done() any {
 }
 
 var aggregateFunctions = map[string]any{
-	"stddev":        newStddev,
-	"stdev":         newStddev,
-	"stddev_pop":    newStddev,
-	"mode":          newMode,
-	"median":        newMedian,
-	"percentile_25": newPercentileN(25),
-	"perc_25":       newPercentileN(25),
-	"percentile_50": newPercentileN(50),
-	"perc_50":       newPercentileN(50),
-	"percentile_75": newPercentileN(75),
-	"perc_75":       newPercentileN(75),
-	"percentile_90": newPercentileN(90),
-	"perc_90":       newPercentileN(90),
-	"percentile_95": newPercentileN(95),
-	"perc_95":       newPercentileN(95),
-	"percentile_99": newPercentileN(99),
-	"perc_99":       newPercentileN(99),
-	"percentile":    newPercentile,
-	"perc":          newPercentile,
+	"stddev":             newStddev,
+	"stdev":              newStddev,
+	"stddev_pop":         newStddev,
+	"mode":               newMode,
+	"median":             newMedian,
+	"percentile_25":      newPercentileN(25),
+	"perc_25":            newPercentileN(25),
+	"percentile_50":      newPercentileN(50),
+	"perc_50":            newPercentileN(50),
+	"percentile_75":      newPercentileN(75),
+	"perc_75":            newPercentileN(75),
+	"percentile_90":      newPercentileN(90),
+	"perc_90":            newPercentileN(90),
+	"percentile_95":      newPercentileN(95),
+	"perc_95":            newPercentileN(95),
+	"percentile_99":      newPercentileN(99),
+	"perc_99":            newPercentileN(99),
+	"percentile":         newPercentile,
+	"perc":               newPercentile,
 	"percentile_cont_25": newPercentileContN(25),
 	"perc_cont_25":       newPercentileContN(25),
 	"percentile_cont_50": newPercentileContN(50),

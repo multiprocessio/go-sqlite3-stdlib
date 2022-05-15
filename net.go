@@ -57,10 +57,10 @@ func urlFragment(u string) string {
 }
 
 var netFunctions = map[string]any{
-	"url_host": urlHost,
-	"url_port": urlPort,
-	"url_scheme": urlScheme,
-	"url_path": urlPath,
-	"url_param": urlParam,
+	"url_host":     urlHost,
+	"url_port":     urlPort,
+	"url_scheme":   urlScheme,
+	"url_path":     urlPath,
+	"url_param":    urlParam,
 	"url_fragment": urlFragment,
 }

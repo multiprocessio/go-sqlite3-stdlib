@@ -6,9 +6,9 @@ import (
 )
 
 func Test_date(t *testing.T) {
-	tests := []struct{
-		in string
-		fn string
+	tests := []struct {
+		in  string
+		fn  string
 		out int
 	}{
 		{"2021-04-05", "date_year", 2021},
