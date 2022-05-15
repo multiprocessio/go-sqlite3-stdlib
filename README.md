@@ -39,10 +39,10 @@ func main() {
 There is 95% test coverage and automated tests on Windows, macOS and
 Linux.
 
-## Where is this used?
+## I just want to use it as a CLI or GUI
 
-This project is used in [dsq](https://github.com/multiprocessio/dsq)
-(a command-line tool for executing SQL on data files) and in
+See [dsq](https://github.com/multiprocessio/dsq) (a command-line tool
+for executing SQL on data files) and
 [DataStation](https://github.com/multiprocessio/datastation), a GUI
 application for querying and building reports with data from
 databases, servers, and files.
@@ -72,7 +72,7 @@ databases, servers, and files.
 | percentile, perc | Discrete | `perc(response_time, 95)` |
 | percentile_25, perc_25, percentile_50, perc_50, percentile_75, perc_75, percentile_90, perc_90, percentile_95, perc_95, percentile_99, perc_99 | Discrete | `perc_99(response_time)` |
 | percentile_cont, perc_cont | Continuous | `perc_cont(response_time, 95)` |
-| percentile_cont_25, perc_cont_25, percentile_cont_50, perc_cont_50, percentile_cont_75, perc_cont_75, percentile_cont_90, perc_cont_90, percentile_cont_95, perc_cont_95, percentile_cont_99, perc_cont_99| Continuous | `perc_cont_99(response_cont_time)` |
+| percentile_cont_25, perc_cont_25, percentile_cont_50, perc_cont_50, percentile_cont_75, perc_cont_75, percentile_cont_90, perc_cont_90, percentile_cont_95, perc_cont_95, percentile_cont_99, perc_cont_99| Continuous | `perc_cont_99(response_time)` |
 
 ### Net
 
