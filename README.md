@@ -6,7 +6,11 @@ As an alternative to compiling C extensions like
 [mattn/go-sqlite3](https://github.com/mattn/go-sqlite3), this package
 implements many of these functions (and more from PostgreSQL) in Go.
 
-## Example
+This is mostly bindings to Go standard library functions or some
+third-party libraries like [gonum](https://gonum.org/v1/gonum) and
+[dateparse](https://github.com/araddon/dateparse).
+
+# Example
 
 ```go
 package main
@@ -37,12 +41,12 @@ func main() {
 
 ```
 
-## How is this tested?
+# How is this tested?
 
 There is 95% test coverage and automated tests on Windows, macOS and
 Linux.
 
-## I just want to use it as a CLI or GUI
+# I just want to use it as a CLI or GUI
 
 See [dsq](https://github.com/multiprocessio/dsq) (a command-line tool
 for executing SQL on data files) and
@@ -50,9 +54,9 @@ for executing SQL on data files) and
 application for querying and building reports with data from
 databases, servers, and files.
 
-## Functions
+# Functions
 
-### Strings
+## Strings
 
 | Name(s) | Notes | Example |
 | ------------------------ | ---- | --- |
@@ -65,7 +69,7 @@ databases, servers, and files.
 | lpad | Omit the second argument to default to padding with spaces | `lpad('22', 3, '0') = '022'` |
 | rpad | Omit the second argument to default to padding with spaces | `rpad('22', 3, '0') = '220'`|
 
-### Aggregation
+## Aggregation
 
 | Name(s) | Notes | Example |
 | ------------------------ | ---- | --- |
@@ -77,7 +81,7 @@ databases, servers, and files.
 | percentile_cont, perc_cont | Continuous | `perc_cont(response_time, 95)` |
 | percentile_cont_25, perc_cont_25, percentile_cont_50, perc_cont_50, percentile_cont_75, perc_cont_75, percentile_cont_90, perc_cont_90, percentile_cont_95, perc_cont_95, percentile_cont_99, perc_cont_99| Continuous | `perc_cont_99(response_time)` |
 
-### Net
+## Net
 
 | Name(s) | Notes | Example |
 | ------------------------ | ---- | --- |
@@ -88,7 +92,7 @@ databases, servers, and files.
 | url_param | | `url_param('https://x.com/home.html?p=123&z=%5B1%2C2%5D#section-1', 'z') = '[1,2]'` |
 | url_fragment | | `url_fragment('https://x.com/home.html?p=123&z=%5B1%2C2%5D#section-1') = 'section-1'` |
 
-### Date
+## Date
 
 Best effort family of date parsing and retrieval. Results will differ
 depending on your computer's timezone.
@@ -103,13 +107,13 @@ depending on your computer's timezone.
 | date_minute | | `date_minute('May 6, 2021 4:50') = 50` |
 | date_second | | `date_second('May 6, 2021 4:50:20') = 20` |
 | date_unix | | `date_unix('May 6, 2021 4:50:20') = 1588740620` |
-| date_rfc3339 | | `date_unix('May 6, 2021 4:50:20') = 2020-05-06T04:50:20Z` |
+| date_rfc3339 | | `date_rfc3339('May 6, 2021 4:50:20') = 2020-05-06T04:50:20Z` |
 
-### Regexp
+## Regexp
 
 * regexp: `x REGEXP '[a-z]+$'` (uses Go's regexp, not PCRE)
 
-### Math
+## Math
 
 * acos
 * acosh 
@@ -137,3 +141,18 @@ depending on your computer's timezone.
 * tan
 * tanh
 * trunc, truncate
+
+# Contribute
+
+Join the [#dev channel on the Multiprocess Labs
+Discord](https://discord.gg/22ZCpaS9qm).
+
+If you have an idea for a new function, say so on the Discord channel
+or open an issue here.
+
+Make sure the function doesn't already exist in dsq (or the sqlite3
+CLI).
+
+# License
+
+This software is licensed under an Apache 2.0 license.
