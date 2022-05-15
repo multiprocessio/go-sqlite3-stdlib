@@ -48,8 +48,8 @@ func main() {
 * rtrim: `rtrim('abccbad', 'd') = 'abccbad'`
 * replace: `replace(string, what, with)`
 * reverse: `reverse(string)`
-* lpad: `lpad(string, length, what = ' ')`
-* rpad: `rpad(string, length, what = ' ')`
+* lpad: `lpad(string, length[, what])`
+* rpad: `rpad(string, length[, what])`
 
 ### Math
 
