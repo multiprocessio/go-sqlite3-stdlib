@@ -10,6 +10,8 @@ var extensions = []map[string]any{
 	mathFunctions,
 	stringFunctions,
 	regexpFunctions,
+	dateFunctions,
+	netFunctions,
 }
 
 func Register(driverName string) {

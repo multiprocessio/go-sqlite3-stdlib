@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"math"
 	"sort"
+
+	"gonum.org/v1/gonum/stat"
 )
 
 type mode struct {
@@ -31,34 +33,70 @@ func (m *mode) Done() any {
 	return m.top
 }
 
-// SOURCE: https://github.com/mattn/go-sqlite3/blob/master/_example/custom_func/main.go
 type stddev struct {
-	xs []int64
-	// Running average calculation
-	sum int64
-	n   int64
+	xs []float64
 }
 
 func newStddev() *stddev { return &stddev{} }
 
-func (s *stddev) Step(x int64) {
-	s.xs = append(s.xs, x)
-	s.sum += x
-	s.n++
+func (s *stddev) Step(x any) {
+	s.xs = append(s.xs, floaty(x))
 }
 
 func (s *stddev) Done() float64 {
-	mean := float64(s.sum) / float64(s.n)
-	var sqDiff []float64
-	for _, x := range s.xs {
-		sqDiff = append(sqDiff, math.Pow(float64(x)-mean, 2))
+	return stat.PopStdDev(s.xs, nil)
+}
+
+type percentile struct {
+	xs         []float64
+	percentile float64
+	kind       stat.CumulantKind
+}
+
+func newPercentile() *percentile {
+	return &percentile{
+		kind: stat.Empirical,
 	}
-	var dev float64
-	for _, x := range sqDiff {
-		dev += x
+}
+
+func newPercentileN(n int) func() *percentile {
+	return func() *percentile {
+		p := newPercentile()
+		p.percentile = float64(n)
+		return p
 	}
-	dev /= float64(len(sqDiff))
-	return math.Sqrt(dev)
+}
+
+func newPercentileCont() *percentile {
+	return &percentile{
+		kind: stat.LinInterp,
+	}
+}
+
+func newPercentileContN(n int) func() *percentile {
+	return func() *percentile {
+		p := newPercentileCont()
+		p.percentile = float64(n)
+		return p
+	}
+}
+
+func (s *percentile) Step(x any, perc ...any) {
+	if len(perc) > 0 {
+		s.percentile = floaty(perc[0])
+	}
+
+	s.xs = append(s.xs, floaty(x))
+}
+
+func (s *percentile) Done() float64 {
+	if s.percentile == 0 || len(s.xs) == 0 {
+		return 0
+	}
+
+	sort.Float64s(s.xs)
+	r := stat.Quantile(s.percentile/100, s.kind, s.xs, nil)
+	return r
 }
 
 type sqliteValueKind uint
@@ -163,9 +201,37 @@ func (m *median) Done() any {
 }
 
 var aggregateFunctions = map[string]any{
-	"stddev":     newStddev,
-	"stdev":      newStddev,
-	"stddev_pop": newStddev,
-	"mode":       newMode,
-	"median":     newMedian,
+	"stddev":             newStddev,
+	"stdev":              newStddev,
+	"stddev_pop":         newStddev,
+	"mode":               newMode,
+	"median":             newMedian,
+	"percentile_25":      newPercentileN(25),
+	"perc_25":            newPercentileN(25),
+	"percentile_50":      newPercentileN(50),
+	"perc_50":            newPercentileN(50),
+	"percentile_75":      newPercentileN(75),
+	"perc_75":            newPercentileN(75),
+	"percentile_90":      newPercentileN(90),
+	"perc_90":            newPercentileN(90),
+	"percentile_95":      newPercentileN(95),
+	"perc_95":            newPercentileN(95),
+	"percentile_99":      newPercentileN(99),
+	"perc_99":            newPercentileN(99),
+	"percentile":         newPercentile,
+	"perc":               newPercentile,
+	"percentile_cont_25": newPercentileContN(25),
+	"perc_cont_25":       newPercentileContN(25),
+	"percentile_cont_50": newPercentileContN(50),
+	"perc_cont_50":       newPercentileContN(50),
+	"percentile_cont_75": newPercentileContN(75),
+	"perc_cont_75":       newPercentileContN(75),
+	"percentile_cont_90": newPercentileContN(90),
+	"perc_cont_90":       newPercentileContN(90),
+	"percentile_cont_95": newPercentileContN(95),
+	"perc_cont_95":       newPercentileContN(95),
+	"percentile_cont_99": newPercentileContN(99),
+	"perc_cont_99":       newPercentileContN(99),
+	"percentile_cont":    newPercentileCont,
+	"perc_cont":          newPercentileCont,
 }

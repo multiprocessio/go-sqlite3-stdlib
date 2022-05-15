@@ -85,10 +85,9 @@ func Test_ltrim(t *testing.T) {
 
 	for _, test := range tests {
 		assertQuery(t, fmt.Sprintf("SELECT ltrim('%s', '%s');", test.in, test.trim), test.out)
-		assertQuery(t, fmt.Sprintf("SELECT trim('%s', '%s');", test.in, test.trim), test.out)
 	}
 
-	assertQuery(t, "SELECT trim(3334, 3);", "4")
+	assertQuery(t, "SELECT ltrim(' ac');", "ac")
 }
 
 func Test_rtrim(t *testing.T) {
@@ -114,6 +113,12 @@ func Test_rtrim(t *testing.T) {
 	}
 
 	assertQuery(t, "SELECT rtrim(3334, 4);", "333")
+	assertQuery(t, "SELECT rtrim(' ac ');", " ac")
+}
+
+func Test_trim(t *testing.T) {
+	assertQuery(t, "SELECT trim('  whatever ')", "whatever")
+	assertQuery(t, "SELECT trim('xabcx', 'x')", "abc")
 }
 
 func Test_replace(t *testing.T) {
@@ -163,7 +168,7 @@ func Test_lpad(t *testing.T) {
 	}
 
 	// Test no third argument variation
-	assertQuery(t, "SELECT lpad('22', 3, '0');", "022")
+	assertQuery(t, "SELECT lpad('22', 3);", " 22")
 
 	// int variation
 	assertQuery(t, "SELECT lpad(22, 3, 0);", "022")
@@ -207,5 +212,5 @@ func Test_rpad(t *testing.T) {
 	}
 
 	// Test no 3rd argument variant
-	assertQuery(t, "SELECT rpad('22', 3, '0');", "220")
+	assertQuery(t, "SELECT rpad('22', 3);", "22 ")
 }

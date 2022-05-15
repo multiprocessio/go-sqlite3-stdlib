@@ -25,8 +25,14 @@ func stringy(a any) string {
 	return fmt.Sprintf("%v", a)
 }
 
-func stringy2int(f func(a, b string) int) func(a, b any) int {
-	return func(a, b any) int {
+func stringy1int64(f func(a string) int64) func(a any) int64 {
+	return func(a any) int64 {
+		return f(stringy(a))
+	}
+}
+
+func stringy2int64(f func(a, b string) int64) func(a, b any) int64 {
+	return func(a, b any) int64 {
 		return f(stringy(a), stringy(b))
 	}
 }
@@ -37,19 +43,13 @@ func stringy1string(f func(a string) string) func(a any) string {
 	}
 }
 
-func stringy2string(f func(a, b string) string) func(a, b any) string {
-	return func(a, b any) string {
-		return f(stringy(a), stringy(b))
-	}
-}
-
 func stringy3string(f func(a, b, c string) string) func(a, b, c any) string {
 	return func(a, b, c any) string {
 		return f(stringy(a), stringy(b), stringy(c))
 	}
 }
 
-func ext_repeat(s any, n int) string {
+func repeat(s any, n int) string {
 	var sb strings.Builder
 	for i := 0; i < n; i++ {
 		sb.WriteString(stringy(s))
@@ -58,11 +58,18 @@ func ext_repeat(s any, n int) string {
 	return sb.String()
 }
 
-func ext_charindex(s, sub string) int {
-	return strings.Index(s, sub)
+func charindex(s, sub string) int64 {
+	return int64(strings.Index(s, sub))
 }
 
-func ext_ltrim(s, characters string) string {
+func ltrim(_s, a any) string {
+	s := stringy(_s)
+
+	characters := " "
+	if a != nil {
+		characters = stringy(a)
+	}
+
 	for {
 		old := s
 
@@ -80,7 +87,14 @@ func ext_ltrim(s, characters string) string {
 	return s
 }
 
-func ext_rtrim(s, characters string) string {
+func rtrim(_s, a any) string {
+	s := stringy(_s)
+
+	characters := " "
+	if a != nil {
+		characters = stringy(a)
+	}
+
 	for {
 		old := s
 
@@ -98,8 +112,12 @@ func ext_rtrim(s, characters string) string {
 	return s
 }
 
+func trim(s, a any) string {
+	return ltrim(rtrim(stringy(s), a), a)
+}
+
 // SOURCE: https://stackoverflow.com/a/20225618/1507139
-func ext_reverse(s string) string {
+func reverse(s string) string {
 	size := len(s)
 	buf := make([]byte, size)
 	for start := 0; start < size; {
@@ -110,14 +128,17 @@ func ext_reverse(s string) string {
 	return string(buf)
 }
 
-func ext_lpad(_s any, length int, _padWith any) string {
+func lpad(_s any, length int, _padWith ...any) string {
 	s := stringy(_s)
 
 	if len(s) > length {
 		return s[:length]
 	}
 
-	padWith := []rune(stringy(_padWith))
+	padWith := []rune(" ")
+	if len(_padWith) > 0 {
+		padWith = []rune(stringy(_padWith[0]))
+	}
 
 	var sb strings.Builder
 	for i := 0; i < length-len(s); i++ {
@@ -128,14 +149,17 @@ func ext_lpad(_s any, length int, _padWith any) string {
 	return sb.String()[:length]
 }
 
-func ext_rpad(_s any, length int, _padWith any) string {
+func rpad(_s any, length int, _padWith ...any) string {
 	s := stringy(_s)
 
 	if len(s) > length {
 		return s[:length]
 	}
 
-	padWith := []rune(stringy(_padWith))
+	padWith := []rune(" ")
+	if len(_padWith) > 0 {
+		padWith = []rune(stringy(_padWith[0]))
+	}
 
 	var sb strings.Builder
 	sb.WriteString(s)
@@ -147,15 +171,15 @@ func ext_rpad(_s any, length int, _padWith any) string {
 }
 
 var stringFunctions = map[string]any{
-	"repeat":    ext_repeat,
-	"replicate": ext_repeat,
-	"strpos":    stringy2int(ext_charindex),
-	"charindex": stringy2int(ext_charindex),
-	"ltrim":     stringy2string(ext_ltrim),
-	"rtrim":     stringy2string(ext_rtrim),
-	"trim":      stringy2string(ext_ltrim),
+	"repeat":    repeat,
+	"replicate": repeat,
+	"strpos":    stringy2int64(charindex),
+	"charindex": stringy2int64(charindex),
+	"ltrim":     ltrim,
+	"rtrim":     rtrim,
+	"trim":      trim,
 	"replace":   stringy3string(strings.ReplaceAll),
-	"reverse":   stringy1string(ext_reverse),
-	"lpad":      ext_lpad,
-	"rpad":      ext_rpad,
+	"reverse":   stringy1string(reverse),
+	"lpad":      lpad,
+	"rpad":      rpad,
 }
