@@ -36,14 +36,10 @@ func main() {
 
 ## Functions
 
-### Regexp
-
-* regexp: `x REGEXP '[a-z]+$'` (uses Go's regexp, not PCRE)
-
 ### Strings
 
 | Name(s) | Notes | Example |
-| ======================== | ==== | === |
+| ------------------------ | ---- | --- |
 | repeat, replicate | |  `repeat('f', 5) = 'fffff'` |
 | strpos, charindex | | `strpos('abc', 'b') = 1` |
 | ltrim | Omit the second to default to trimming spaces | `ltrim('abccbad', 'abc') = 'd'` |
@@ -56,7 +52,7 @@ func main() {
 ### Aggregation
 
 | Name(s) | Notes | Example |
-| ======================== | ==== | === |
+| ------------------------ | ---- | --- |
 | stddev, stdev, stddev_pop | | |
 | mode | | |
 | median | | |
@@ -68,7 +64,7 @@ func main() {
 ### Net
 
 | Name(s) | Notes | Example |
-| ======================== | ==== | === |
+| ------------------------ | ---- | --- |
 | url_scheme | |  `url_scheme('https://x.com:90/home.html') = 'https'` |
 * url_host | |  `url_host('https://x.com:90/home.html') = 'x.com:90'` |
 * url_port | |  `url_port('https://x.com:90/home.html') = '90'` |
@@ -82,7 +78,7 @@ Best effort family of date parsing and retrieval. Results will differ
 depending on your computer's timezone.
 
 | Name(s) | Notes | Example |
-| ======================== | ==== | === |
+| ------------------------ | ---- | --- |
 | date_year | | `date_year('2021-04-05') = 2021` |
 | date_month | January is 1, not 0 | `date_month('May 6, 2021') = 5` |
 | date_day | | `date_day('May 6, 2021') = 6` |
@@ -93,6 +89,9 @@ depending on your computer's timezone.
 | date_unix | | `date_unix('May 6, 2021 4:50:20') = 1588740620` |
 | date_rfc3339 | | `date_unix('May 6, 2021 4:50:20') = 2020-05-06T04:50:20Z` |
 
+### Regexp
+
+* regexp: `x REGEXP '[a-z]+$'` (uses Go's regexp, not PCRE)
 
 ### Math
 
