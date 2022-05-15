@@ -6,8 +6,8 @@ replace github.com/mattn/go-sqlite3 v1.14.13 => github.com/multiprocessio/go-sql
 
 require (
 	github.com/mattn/go-sqlite3 v1.14.13
-	github.com/petar/GoLLRB v0.0.0-20210522233825-ae3b015fd3e9
 	github.com/stretchr/testify v1.7.1
+	gonum.org/v1/gonum v0.11.0
 )
 
 require (

@@ -66,3 +66,17 @@ func Test_median(t *testing.T) {
 		"SELECT median(n) FROM x",
 	}, "3.4")
 }
+
+func Test_percentile(t *testing.T) {
+	assertQueryPrepare(t, []string{
+		"CREATE TABLE x (n INT)",
+		"INSERT INTO x VALUES (1), (3), (4)",
+		"SELECT perc_50(n) FROM x",
+	}, "3")
+
+	assertQueryPrepare(t, []string{
+		"CREATE TABLE x (n INT)",
+		"INSERT INTO x VALUES (5), (2), (4)",
+		"SELECT perc_75(n) FROM x",
+	}, "5")
+}
