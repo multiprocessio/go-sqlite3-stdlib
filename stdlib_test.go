@@ -15,7 +15,7 @@ func TestMain(m *testing.M) {
 	if rc == 0 && testing.CoverMode() != "" {
 		c := testing.Coverage()
 		// For some reason this value is lower than what -cover reports
-		if c < 0.91 {
+		if c < 0.95 {
 			log.Println("Tests passed but coverage failed at", c)
 			rc = -1
 		}

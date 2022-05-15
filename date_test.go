@@ -23,7 +23,9 @@ func Test_date(t *testing.T) {
 
 	for _, test := range tests {
 		assertQuery(t, fmt.Sprintf("SELECT %s('%s')", test.fn, test.in), fmt.Sprintf("%d", test.out))
+		assertQuery(t, fmt.Sprintf("SELECT %s(' total garbage')", test.fn), "-1")
 	}
 
 	assertQuery(t, "SELECT date_rfc3339('May 6, 2020 4:50:20')", "2020-05-06T04:50:20Z")
+	assertQuery(t, "SELECT date_rfc3339(' total garbage ')", "")
 }
