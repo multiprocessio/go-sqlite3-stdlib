@@ -34,6 +34,19 @@ func main() {
 }
 ```
 
+## How is this tested?
+
+There is 95% test coverage and automated tests on Windows, macOS and
+Linux.
+
+## Where is this used?
+
+This project is used in [dsq](https://github.com/multiprocessio/dsq)
+(a command-line tool for executing SQL on data files) and in
+[DataStation](https://github.com/multiprocessio/datastation), a GUI
+application for querying and building reports with data from
+databases, servers, and files.
+
 ## Functions
 
 ### Strings
