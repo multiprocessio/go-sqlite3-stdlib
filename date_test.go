@@ -15,7 +15,7 @@ func Test_date(t *testing.T) {
 		{"May 6, 2020", "date_month", 5},
 		{"May 6, 2020", "date_day", 6},
 		{"May 6, 2020", "date_yearday", 127},
-		{"May 6, 2020 4:50", "date_hour", 4},
+		{"May 6, 2020 4:50 PM", "date_hour", 16},
 		{"May 6, 2020 4:50", "date_minute", 50},
 		{"May 6, 2020 4:50:20", "date_second", 20},
 		{"May 6, 2020 4:50:20", "date_unix", 1588740620},

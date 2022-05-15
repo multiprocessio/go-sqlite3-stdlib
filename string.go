@@ -128,14 +128,17 @@ func reverse(s string) string {
 	return string(buf)
 }
 
-func lpad(_s any, length int, _padWith any) string {
+func lpad(_s any, length int, _padWith ...any) string {
 	s := stringy(_s)
 
 	if len(s) > length {
 		return s[:length]
 	}
 
-	padWith := []rune(stringy(_padWith))
+	padWith := []rune(" ")
+	if len(_padWith) > 0 {
+		padWith = []rune(stringy(_padWith[0]))
+	}
 
 	var sb strings.Builder
 	for i := 0; i < length-len(s); i++ {
@@ -146,14 +149,17 @@ func lpad(_s any, length int, _padWith any) string {
 	return sb.String()[:length]
 }
 
-func rpad(_s any, length int, _padWith any) string {
+func rpad(_s any, length int, _padWith ...any) string {
 	s := stringy(_s)
 
 	if len(s) > length {
 		return s[:length]
 	}
 
-	padWith := []rune(stringy(_padWith))
+	padWith := []rune(" ")
+	if len(_padWith) > 0 {
+		padWith = []rune(stringy(_padWith[0]))
+	}
 
 	var sb strings.Builder
 	sb.WriteString(s)

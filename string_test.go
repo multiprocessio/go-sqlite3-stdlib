@@ -168,7 +168,7 @@ func Test_lpad(t *testing.T) {
 	}
 
 	// Test no third argument variation
-	assertQuery(t, "SELECT lpad('22', 3, '0');", "022")
+	assertQuery(t, "SELECT lpad('22', 3);", " 22")
 
 	// int variation
 	assertQuery(t, "SELECT lpad(22, 3, 0);", "022")
@@ -212,5 +212,5 @@ func Test_rpad(t *testing.T) {
 	}
 
 	// Test no 3rd argument variant
-	assertQuery(t, "SELECT rpad('22', 3, '0');", "220")
+	assertQuery(t, "SELECT rpad('22', 3);", "22 ")
 }
