@@ -41,19 +41,6 @@ func main() {
 
 ```
 
-# How is this tested?
-
-There is 95% test coverage and automated tests on Windows, macOS and
-Linux.
-
-# I just want to use it as a CLI or GUI
-
-See [dsq](https://github.com/multiprocessio/dsq) (a command-line tool
-for executing SQL on data files) and
-[DataStation](https://github.com/multiprocessio/datastation), a GUI
-application for querying and building reports with data from
-databases, servers, and files.
-
 # Functions
 
 ## Strings
@@ -141,6 +128,19 @@ depending on your computer's timezone.
 * tan
 * tanh
 * trunc, truncate
+
+# How is this tested?
+
+There is 95% test coverage and automated tests on Windows, macOS and
+Linux.
+
+# I just want to use it as a CLI or GUI
+
+See [dsq](https://github.com/multiprocessio/dsq) (a command-line tool
+for executing SQL on data files) and
+[DataStation](https://github.com/multiprocessio/datastation), a GUI
+application for querying and building reports with data from
+databases, servers, and files.
 
 # Contribute
 
