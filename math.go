@@ -37,7 +37,7 @@ func floaty(a any) float64 {
 	}
 }
 
-func degrees(rad any) float64 {
+func degrees(rad float64) float64 {
 	return floaty(rad) * (180 / math.Pi)
 }
 
@@ -45,14 +45,12 @@ func pi() float64 {
 	return math.Pi
 }
 
-func radians(deg any) float64 {
+func radians(deg float64) float64 {
 	return floaty(deg) * (math.Pi / 180)
 }
 
 // Rounds toward zero
-func trunc(a any) float64 {
-	f := floaty(a)
-
+func trunc(f float64) float64 {
 	if f >= 0 {
 		return math.Floor(f)
 	}
@@ -89,7 +87,7 @@ var mathFunctions = map[string]any{
 	"ceiling": floaty1Float64(math.Ceil),
 	"cos":     floaty1Float64(math.Cos),
 	"cosh":    floaty1Float64(math.Cosh),
-	"degrees": degrees,
+	"degrees": floaty1Float64(degrees),
 	"exp":     floaty1Float64(math.Exp),
 	"floor":   floaty1Float64(math.Floor),
 	"ln":      floaty1Float64(math.Log),
@@ -101,12 +99,12 @@ var mathFunctions = map[string]any{
 	"pi":       pi,
 	"pow":      floaty2Float64(math.Pow),
 	"power":    floaty2Float64(math.Pow),
-	"radians":  radians,
+	"radians":  floaty1Float64(radians),
 	"sin":      floaty1Float64(math.Sin),
 	"sinh":     floaty1Float64(math.Sinh),
 	"sqrt":     floaty1Float64(math.Sqrt),
 	"tan":      floaty1Float64(math.Tan),
 	"tanh":     floaty1Float64(math.Tanh),
-	"trunc":    trunc,
-	"truncate": trunc,
+	"trunc":    floaty1Float64(trunc),
+	"truncate": floaty1Float64(trunc),
 }
