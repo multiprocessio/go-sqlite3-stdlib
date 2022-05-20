@@ -43,12 +43,6 @@ func stringy1string(f func(a string) string) func(a any) string {
 	}
 }
 
-func stringy3string(f func(a, b, c string) string) func(a, b, c any) string {
-	return func(a, b, c any) string {
-		return f(stringy(a), stringy(b), stringy(c))
-	}
-}
-
 func repeat(s any, n int) string {
 	var sb strings.Builder
 	for i := 0; i < n; i++ {
