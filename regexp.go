@@ -4,7 +4,7 @@ import (
 	"regexp"
 )
 
-func _regexp(re, s string) bool {
+func ext_regexp(re, s string) bool {
 	c, err := regexp.Compile(re)
 	if err != nil {
 		return false
@@ -14,5 +14,5 @@ func _regexp(re, s string) bool {
 }
 
 var regexpFunctions = map[string]any{
-	"regexp": _regexp,
+	"regexp": ext_regexp,
 }

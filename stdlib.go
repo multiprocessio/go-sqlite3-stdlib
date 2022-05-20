@@ -12,29 +12,32 @@ var extensions = []map[string]any{
 	regexpFunctions,
 	dateFunctions,
 	netFunctions,
+	encodingFunctions,
+}
+
+func ConnectHook(conn *sqlite3.SQLiteConn) error {
+	for _, functions := range extensions {
+		for name, impl := range functions {
+			err := conn.RegisterFunc(name, impl, true)
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	for name, impl := range aggregateFunctions {
+		err := conn.RegisterAggregator(name, impl, true)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func Register(driverName string) {
 	sql.Register(driverName,
 		&sqlite3.SQLiteDriver{
-			ConnectHook: func(conn *sqlite3.SQLiteConn) error {
-				for _, functions := range extensions {
-					for name, impl := range functions {
-						err := conn.RegisterFunc(name, impl, true)
-						if err != nil {
-							return err
-						}
-					}
-				}
-
-				for name, impl := range aggregateFunctions {
-					err := conn.RegisterAggregator(name, impl, true)
-					if err != nil {
-						return err
-					}
-				}
-
-				return nil
-			},
+			ConnectHook: ConnectHook,
 		})
 }

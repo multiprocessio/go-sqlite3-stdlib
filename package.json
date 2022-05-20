@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "prettier": "^2.6.2"
+  },
+  "scripts": {
+    "fmt": "gofmt -w -s . && yarn prettier -w '*.md'"
+  }
+}
