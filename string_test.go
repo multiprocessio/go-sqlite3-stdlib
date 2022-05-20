@@ -12,6 +12,10 @@ func Test_string(t *testing.T) {
 	assert.Equal(t, "null", stringy(nil))
 }
 
+func Test_len(t *testing.T) {
+	assertQuery(t, "SELECT len('a')", "1")
+}
+
 func Test_repeat(t *testing.T) {
 	assertQuery(t, "SELECT repeat('a', 3)", "aaa")
 	assertQuery(t, "SELECT replicate('a', 3)", "aaa")

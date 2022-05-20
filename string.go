@@ -110,7 +110,12 @@ func rpad(_s any, length int, _padWith ...any) string {
 	return sb.String()
 }
 
+func length(s string) int64 {
+	return int64(len(s))
+}
+
 var stringFunctions = map[string]any{
+	"len":       stringy1int64(length),
 	"repeat":    repeat,
 	"replicate": repeat,
 	"strpos":    stringy2int64(charindex),

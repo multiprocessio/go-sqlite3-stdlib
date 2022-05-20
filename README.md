@@ -52,6 +52,7 @@ func main() {
 | reverse           |                                                            | `reverse('abc') = 'cba'`     |
 | lpad              | Omit the second argument to default to padding with spaces | `lpad('22', 3, '0') = '022'` |
 | rpad              | Omit the second argument to default to padding with spaces | `rpad('22', 3, '0') = '220'` |
+| len               | Shorthand for `length`                                     | `len('my string') = '9'`     |
 
 ## Aggregation
 
