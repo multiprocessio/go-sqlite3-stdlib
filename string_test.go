@@ -16,6 +16,14 @@ func Test_len(t *testing.T) {
 	assertQuery(t, "SELECT len('a')", "1")
 }
 
+func Test_split_part(t *testing.T) {
+	assertQuery(t, "SELECT split_part('a', '', 0)", "a")
+	assertQuery(t, "SELECT split_part('a', 'blub', 2)", "")
+	assertQuery(t, "SELECT split_part('ablubablubb', 'blub', 2)", "b")
+	assertQuery(t, "SELECT split_part('1,2,3', ',', 2)", "3")
+	assertQuery(t, "SELECT split_part('1,2,3', ',', -1)", "3")
+}
+
 func Test_repeat(t *testing.T) {
 	assertQuery(t, "SELECT repeat('a', 3)", "aaa")
 	assertQuery(t, "SELECT replicate('a', 3)", "aaa")

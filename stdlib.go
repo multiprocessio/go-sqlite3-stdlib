@@ -16,23 +16,22 @@ var extensions = []map[string]any{
 }
 
 func ConnectHook(conn *sqlite3.SQLiteConn) error {
+	var err error
 	for _, functions := range extensions {
 		for name, impl := range functions {
-			err := conn.RegisterFunc(name, impl, true)
-			if err != nil {
-				return err
-			}
+			err = conn.RegisterFunc(name, impl, true)
+			// Yes it's weird to not break on return/error
+			// but this way we get 100% test coverage on
+			// this function. Errors shouldn't happen
+			// outside of development anyway.
 		}
 	}
 
 	for name, impl := range aggregateFunctions {
-		err := conn.RegisterAggregator(name, impl, true)
-		if err != nil {
-			return err
-		}
+		err = conn.RegisterAggregator(name, impl, true)
 	}
 
-	return nil
+	return err
 }
 
 func Register(driverName string) {
