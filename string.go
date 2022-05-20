@@ -43,12 +43,6 @@ func stringy1string(f func(a string) string) func(a any) string {
 	}
 }
 
-func stringy3string(f func(a, b, c string) string) func(a, b, c any) string {
-	return func(a, b, c any) string {
-		return f(stringy(a), stringy(b), stringy(c))
-	}
-}
-
 func repeat(s any, n int) string {
 	var sb strings.Builder
 	for i := 0; i < n; i++ {
@@ -60,60 +54,6 @@ func repeat(s any, n int) string {
 
 func charindex(s, sub string) int64 {
 	return int64(strings.Index(s, sub))
-}
-
-func ltrim(_s, a any) string {
-	s := stringy(_s)
-
-	characters := " "
-	if a != nil {
-		characters = stringy(a)
-	}
-
-	for {
-		old := s
-
-		for _, c := range characters {
-			s = strings.TrimLeft(s, string(c))
-		}
-
-		// Keep on trimming while any character appears on the left.
-		// e.g. ltrim('abcabcd', 'abc') == 'd'
-		if s == old {
-			break
-		}
-	}
-
-	return s
-}
-
-func rtrim(_s, a any) string {
-	s := stringy(_s)
-
-	characters := " "
-	if a != nil {
-		characters = stringy(a)
-	}
-
-	for {
-		old := s
-
-		for _, c := range characters {
-			s = strings.TrimRight(s, string(c))
-		}
-
-		// Keep on trimming while any character appears on the left.
-		// e.g. ltrim('abcabcd', 'abc') == 'd'
-		if s == old {
-			break
-		}
-	}
-
-	return s
-}
-
-func trim(s, a any) string {
-	return ltrim(rtrim(stringy(s), a), a)
 }
 
 // SOURCE: https://stackoverflow.com/a/20225618/1507139
@@ -175,10 +115,6 @@ var stringFunctions = map[string]any{
 	"replicate": repeat,
 	"strpos":    stringy2int64(charindex),
 	"charindex": stringy2int64(charindex),
-	"ltrim":     ltrim,
-	"rtrim":     rtrim,
-	"trim":      trim,
-	"replace":   stringy3string(strings.ReplaceAll),
 	"reverse":   stringy1string(reverse),
 	"lpad":      lpad,
 	"rpad":      rpad,

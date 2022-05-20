@@ -49,9 +49,6 @@ func main() {
 | ------------------------ | ---- | --- |
 | repeat, replicate | |  `repeat('f', 5) = 'fffff'` |
 | strpos, charindex | | `strpos('abc', 'b') = 1` |
-| ltrim | Omit the second to default to trimming spaces | `ltrim('abccbad', 'abc') = 'd'` |
-| rtrim | Omit the second to default to trimming spaces | `rtrim('abccbad', 'd') = 'abccbad'` |
-| replace | | `replace('abc', 'c', 'd') = 'abd` |
 | reverse | | `reverse('abc') = 'cba'` |
 | lpad | Omit the second argument to default to padding with spaces | `lpad('22', 3, '0') = '022'` |
 | rpad | Omit the second argument to default to padding with spaces | `rpad('22', 3, '0') = '220'`|
@@ -98,36 +95,39 @@ depending on your computer's timezone.
 
 ## Regexp
 
-* regexp: `x REGEXP '[a-z]+$'` (uses Go's regexp, not PCRE)
+| Name(s) | Notes | Example |
+| ------------------------ | ---- | --- |
+| regexp | Go's regexp package, not PCRE. | `x REGEXP '[a-z]+$'`, `REGEXP('[a-z]+$', x)` |
 
 ## Math
 
-* acos
-* acosh 
-* asin
-* asinh 
-* atan
-* atanh
-* ceil
-* ceiling
-* cos
-* cosh
-* degrees
-* exp
-* floor
-* ln, log
-* log10
-* log2
-* mod
-* pi
-* pow, power
-* radians
-* sin
-* sinh
-* sqrt
-* tan
-* tanh
-* trunc, truncate
+| Name(s) | Notes | Example |
+| ------------------------ | ---- | --- |
+| acos | | `acos(n)` |
+| acosh  | | `acosh(n)` |
+| asin | |`asin(n)` |
+| asinh  | | `asinh(n)` |
+| atan | | `atan(n)` |
+| atanh | | `atanh(n)` |
+| ceil, ceiling | | `ceil(n)` |
+| cos | | `ceil(n)` |
+| cosh | | `cosh(n)` |
+| degrees | | `degrees(radians)` |
+| exp | e^n | `exp(n)` |
+| floor | | `floor(n)` |
+| ln, log | | `log(x)` |
+| log10 | | `log10(x)` |
+| log2 | | `log2(x)` |
+| mod | | `mod(num, denom)` |
+| pi | | `pi()` |
+| pow, power | | `pow(base, exp)` |
+| radians | | `radians(degrees)` |
+| sin | | `sin(n)` |
+| sinh | | `sinh(n)` |
+| sqrt | | `sqrt(n)` |
+| tan | | `tan(n)` |
+| tanh | | `tanh(n)` |
+| trunc, truncate | Rounds up to zero if negative, down to zero if positive. | `trunc(-10.9) = -10`, `trunc(10.4) = 10.0` |
 
 # How is this tested?
 
@@ -156,3 +156,4 @@ CLI).
 # License
 
 This software is licensed under an Apache 2.0 license.
+
