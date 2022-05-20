@@ -51,7 +51,7 @@ func main() {
 | len               | Shorthand for `length`                                     | `len('my string') = '9'`                                       |
 | split_part        | Split string an take nth split piece                       | `split('1,2,3', ',', 0) = '1'`, `split('1,2,3', ',' -1) = '3'` |
 | regexp            | Go's regexp package, not PCRE                              | `x REGEXP '[a-z]+$'`, `REGEXP('[a-z]+$', x)`                   |
-| regexp_count      | Number of times the regexp matches in string               | regexp_count('abc1', '[a-z]1') = '1'                           |
+| regexp_count      | Number of times the regexp matches in string               | `regexp_count('abc1', '[a-z]1') = '1'`                         |
 | regexp_split_part | Regexp equivalent of `split_part`                          | `regexp_split_part('ab12', '[a-z]1', 0) = 'a'`                 |
 
 ## Aggregation
