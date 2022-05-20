@@ -16,7 +16,8 @@ jobs:
 
     - run: ./scripts/ci/prepare_linux.sh
     - run: go test -race -cover
-    - run: gofmt -w -s .
+    - run: yarn
+    - run: yarn fmt
     - run: ./scripts/fail_on_diff.sh
 
   tests-ubuntu:

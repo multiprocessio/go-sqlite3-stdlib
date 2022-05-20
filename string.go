@@ -110,12 +110,32 @@ func rpad(_s any, length int, _padWith ...any) string {
 	return sb.String()
 }
 
+func length(s string) int64 {
+	return int64(len(s))
+}
+
+func splitPart(s, sub, _part any) string {
+	part := int(floaty(_part))
+	parts := strings.Split(stringy(s), stringy(sub))
+	if len(parts) == 0 || part >= len(parts) {
+		return ""
+	}
+
+	if part < 0 {
+		part = (len(parts) + part) % len(parts)
+	}
+
+	return parts[part]
+}
+
 var stringFunctions = map[string]any{
-	"repeat":    repeat,
-	"replicate": repeat,
-	"strpos":    stringy2int64(charindex),
-	"charindex": stringy2int64(charindex),
-	"reverse":   stringy1string(reverse),
-	"lpad":      lpad,
-	"rpad":      rpad,
+	"len":        stringy1int64(length),
+	"split_part": splitPart,
+	"repeat":     repeat,
+	"replicate":  repeat,
+	"strpos":     stringy2int64(charindex),
+	"charindex":  stringy2int64(charindex),
+	"reverse":    stringy1string(reverse),
+	"lpad":       lpad,
+	"rpad":       rpad,
 }
