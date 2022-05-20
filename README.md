@@ -6,10 +6,6 @@ As an alternative to compiling C extensions like
 [mattn/go-sqlite3](https://github.com/mattn/go-sqlite3), this package
 implements many of these functions (and more from PostgreSQL) in Go.
 
-This is mostly bindings to Go standard library functions or some
-third-party libraries like [gonum](https://gonum.org/v1/gonum) and
-[dateparse](https://github.com/araddon/dateparse).
-
 # Example
 
 ```go
@@ -60,6 +56,9 @@ func main() {
 
 ## Aggregation
 
+Most of these are implemented as bindings to
+[gonum](https://gonum.org/v1/gonum).
+
 | Name(s)                                                                                                                                                                                                    | Notes      | Example                        |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------ |
 | stddev, stdev, stddev_pop                                                                                                                                                                                  |            |                                |
@@ -83,8 +82,9 @@ func main() {
 
 ## Date
 
-Best effort family of date parsing and retrieval. Results will differ
-depending on your computer's timezone.
+Best effort family of date parsing (uses
+[dateparse](https://github.com/araddon/dateparse)) and date part
+retrieval. Results will differ depending on your computer's timezone.
 
 | Name(s)      | Notes               | Example                                                      |
 | ------------ | ------------------- | ------------------------------------------------------------ |
