@@ -37,6 +37,18 @@ func main() {
 
 ```
 
+# go.mod replace
+
+Until https://github.com/mattn/go-sqlite3/pull/1046 is merged you'll
+need to add the following to your go.mod:
+
+```go
+replace github.com/mattn/go-sqlite3 v1.14.13 => github.com/multiprocessio/go-sqlite3 v1.14.14-0.20220513213203-12637a65d5d7
+```
+
+This is low-risk because go-sqlite3 changes infrequently. As soon
+as that PR is merged though you won't need to do this.
+
 # Functions
 
 ## Strings
@@ -61,9 +73,9 @@ Most of these are implemented as bindings to
 
 | Name(s)                                                                                                                                                                                                    | Notes      | Example                        |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------ |
-| stddev, stdev, stddev_pop                                                                                                                                                                                  |            |                                |
-| mode                                                                                                                                                                                                       |            |                                |
-| median                                                                                                                                                                                                     |            |                                |
+| stddev, stdev, stddev_pop                                                                                                                                                                                  |            | `stddev(n)`                    |
+| mode                                                                                                                                                                                                       |            | `mode(n)`                      |
+| median                                                                                                                                                                                                     |            | `median(n)`                    |
 | percentile, perc                                                                                                                                                                                           | Discrete   | `perc(response_time, 95)`      |
 | percentile_25, perc_25, percentile_50, perc_50, percentile_75, perc_75, percentile_90, perc_90, percentile_95, perc_95, percentile_99, perc_99                                                             | Discrete   | `perc_99(response_time)`       |
 | percentile_cont, perc_cont                                                                                                                                                                                 | Continuous | `perc_cont(response_time, 95)` |
