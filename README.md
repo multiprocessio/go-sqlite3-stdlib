@@ -10,6 +10,10 @@ These are in addition to [all builtin
 functions](https://www.sqlite.org/lang_corefunc.html) provided by
 SQLite.
 
+Read the [DataStation blog
+post](https://datastation.multiprocess.io/docs/0.11.0-release-notes.html)
+to better understand the background.
+
 Continue reading for all functions, notes and examples.
 
 # Example
