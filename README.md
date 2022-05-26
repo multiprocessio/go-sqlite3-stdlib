@@ -6,6 +6,12 @@ As an alternative to compiling C extensions like
 [mattn/go-sqlite3](https://github.com/mattn/go-sqlite3), this package
 implements many of these functions (and more from PostgreSQL) in Go.
 
+These are in addition to [all builtin
+functions](https://www.sqlite.org/lang_corefunc.html) provided by
+SQLite.
+
+Continue reading for all functions, notes and examples.
+
 # Example
 
 ```go
