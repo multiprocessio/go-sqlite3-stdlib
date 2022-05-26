@@ -12,12 +12,12 @@ SQLite.
 
 Continue reading for all functions, notes and examples.
 
-# Used by DataStation, dsq
+# Why would I use this?
 
 This library is used in
 [DataStation](https://github.com/multiprocessio/datastation) and
-[dsq](https://github.com/multiprocessio/dsq) to simplify data analysis
-in SQL.
+[dsq](https://github.com/multiprocessio/dsq) to simplify and power
+data analysis in SQL.
 
 ![Analyzing logs with SQL in DataStation](./screenshot.png)
 
