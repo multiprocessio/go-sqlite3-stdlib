@@ -10,11 +10,20 @@ These are in addition to [all builtin
 functions](https://www.sqlite.org/lang_corefunc.html) provided by
 SQLite.
 
+Continue reading for all functions, notes and examples.
+
+# Used by DataStation, dsq
+
+This library is used in
+[DataStation](https://github.com/multiprocessio/datastation) and
+[dsq](https://github.com/multiprocessio/dsq) to simplify data analysis
+in SQL.
+
+![Analyzing logs with SQL in DataStation](./screenshot.png)
+
 Read the [DataStation blog
 post](https://datastation.multiprocess.io/docs/0.11.0-release-notes.html)
 to better understand the background.
-
-Continue reading for all functions, notes and examples.
 
 # Example
 
