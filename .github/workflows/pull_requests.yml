@@ -19,6 +19,11 @@ jobs:
     - run: yarn
     - run: yarn fmt
     - run: ./scripts/fail_on_diff.sh
+    # Test examples
+    - run: go main.go
+      working-directory: ./examples/connecthook
+    - run: go main.go
+      working-directory: ./examples/basic
 
   tests-ubuntu:
     runs-on: ubuntu-latest

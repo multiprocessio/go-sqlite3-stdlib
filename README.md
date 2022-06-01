@@ -40,20 +40,41 @@ func main() {
 
 	fmt.Println(s)
 }
-
 ```
 
-# go.mod replace
-
-Until https://github.com/mattn/go-sqlite3/pull/1046 is merged you'll
-need to add the following to your go.mod:
+Alternatively if you want to be able to add your own additional
+extensions you can just use the `ConnectHook`:
 
 ```go
-replace github.com/mattn/go-sqlite3 v1.14.13 => github.com/multiprocessio/go-sqlite3 v1.14.14-0.20220513213203-12637a65d5d7
-```
+package main
 
-This is low-risk because go-sqlite3 changes infrequently. As soon
-as that PR is merged though you won't need to do this.
+import (
+	"database/sql"
+	"fmt"
+
+	sqlite3 "github.com/mattn/go-sqlite3"
+	stdlib "github.com/multiprocessio/go-sqlite3-stdlib"
+)
+
+func main() {
+	sql.Register("sqlite3_ext",
+		&sqlite3.SQLiteDriver{
+			ConnectHook: stdlib.ConnectHook,
+		})
+	db, err := sql.Open("sqlite3_ext", ":memory:")
+	if err != nil {
+		panic(err)
+	}
+
+	var s string
+	err = db.QueryRow("SELECT repeat('x', 2)").Scan(&s)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(s)
+}
+```
 
 # Functions
 
