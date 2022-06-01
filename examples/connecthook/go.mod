@@ -1,4 +1,4 @@
-module basic
+module connecthook
 
 go 1.18
 
