@@ -5,7 +5,8 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  validate:
+    name: 'Code is clean'
     runs-on: ubuntu-latest
 
     if: github.event_name == 'pull_request'
@@ -14,18 +15,15 @@ jobs:
       with:
         ref: ${{ github.ref }}
 
-    - run: ./scripts/ci/prepare_linux.sh
-    - run: go test -race -cover
+    - uses: actions/setup-go@v3
+      with:
+        check-latest: true
     - run: yarn
     - run: yarn fmt
     - run: ./scripts/fail_on_diff.sh
-    # Test examples
-    - run: go run main.go
-      working-directory: ./examples/connecthook
-    - run: go run main.go
-      working-directory: ./examples/basic
 
   tests:
+    name: 'Run tests'
     runs-on:
       - ubuntu-latest
       - windows-latest
@@ -41,3 +39,8 @@ jobs:
         check-latest: true
     - run: go build
     - run: go test -race -cover
+    # Test examples
+    - run: go run main.go
+      working-directory: ./examples/connecthook
+    - run: go run main.go
+      working-directory: ./examples/basic
