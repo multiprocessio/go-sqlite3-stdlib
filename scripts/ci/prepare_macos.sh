@@ -2,7 +2,7 @@
 
 set -eux
 
-GOVERSION=1.18.2
+GOVERSION=1.18
 
 sudo curl -LO https://go.dev/dl/go$GOVERSION.darwin-amd64.tar.gz
 sudo rm -rf /usr/local/go
