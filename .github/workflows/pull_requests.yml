@@ -25,39 +25,19 @@ jobs:
     - run: go run main.go
       working-directory: ./examples/basic
 
-  tests-ubuntu:
-    runs-on: ubuntu-latest
+  tests:
+    runs-on:
+      - ubuntu-latest
+      - windows-latest
+      - macos-latest
 
     steps:
     - uses: actions/checkout@master
       with:
         ref: ${{ github.ref }}
 
-    - run: ./scripts/ci/prepare_linux.sh
-    - run: go build
-    - run: go test -race -cover
-
-  tests-windows:
-    runs-on: windows-latest
-
-    steps:
-    - uses: actions/checkout@master
+    - uses: actions/setup-go@v3
       with:
-        ref: ${{ github.ref }}
-
-    - run: ./scripts/ci/prepare_windows.ps1
-      shell: pwsh
-    - run: go build
-    - run: go test -race -cover
-
-  tests-macos:
-    runs-on: macos-latest
-
-    steps:
-    - uses: actions/checkout@master
-      with:
-        ref: ${{ github.ref }}
-
-    - run: ./scripts/ci/prepare_macos.sh
+        check-latest: true
     - run: go build
     - run: go test -race -cover
