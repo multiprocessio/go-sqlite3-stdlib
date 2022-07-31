@@ -24,10 +24,11 @@ jobs:
 
   tests:
     name: 'Run tests'
-    runs-on:
-      - ubuntu-latest
-      - windows-latest
-      - macos-latest
+
+    strategy:
+      matrix:
+        os: [linux-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@master
