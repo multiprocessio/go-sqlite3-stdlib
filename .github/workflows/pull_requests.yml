@@ -5,59 +5,49 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  validate:
+    name: 'Code is clean'
     runs-on: ubuntu-latest
 
     if: github.event_name == 'pull_request'
     steps:
     - uses: actions/checkout@master
-      with:
-        ref: ${{ github.ref }}
 
-    - run: ./scripts/ci/prepare_linux.sh
-    - run: go test -race -cover
+    - uses: actions/setup-go@v3
+      with:
+        go-version: '>=1.18.0'
+        check-latest: true
     - run: yarn
     - run: yarn fmt
     - run: ./scripts/fail_on_diff.sh
+
+  tests:
+    name: 'Run tests'
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: actions/setup-go@v3
+      with:
+        go-version: '>=1.18.0'
+        check-latest: true
+
+    - name: Downgrade MinGW on Windows (see https://github.com/golang/go/issues/46099)
+      run:   |
+         if [ "$RUNNER_OS" == "Windows" ]; then
+              choco install mingw --version 10.2.0 --allow-downgrade
+         fi
+      shell: bash
+
+    - run: go build
+    - run: go test -race -cover
     # Test examples
     - run: go run main.go
       working-directory: ./examples/connecthook
     - run: go run main.go
       working-directory: ./examples/basic
-
-  tests-ubuntu:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@master
-      with:
-        ref: ${{ github.ref }}
-
-    - run: ./scripts/ci/prepare_linux.sh
-    - run: go build
-    - run: go test -race -cover
-
-  tests-windows:
-    runs-on: windows-latest
-
-    steps:
-    - uses: actions/checkout@master
-      with:
-        ref: ${{ github.ref }}
-
-    - run: ./scripts/ci/prepare_windows.ps1
-      shell: pwsh
-    - run: go build
-    - run: go test -race -cover
-
-  tests-macos:
-    runs-on: macos-latest
-
-    steps:
-    - uses: actions/checkout@master
-      with:
-        ref: ${{ github.ref }}
-
-    - run: ./scripts/ci/prepare_macos.sh
-    - run: go build
-    - run: go test -race -cover
