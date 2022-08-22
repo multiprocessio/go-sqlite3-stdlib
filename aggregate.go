@@ -34,17 +34,29 @@ func (m *mode) Done() any {
 }
 
 type stddev struct {
-	xs []float64
+	mean float64
+	count int
+	meanSquared float64
 }
 
 func newStddev() *stddev { return &stddev{} }
 
 func (s *stddev) Step(x any) {
-	s.xs = append(s.xs, floaty(x))
+	// Welford's method
+	// https://jonisalonen.com/2013/deriving-welfords-method-for-computing-variance/
+	xf := floaty(x)
+	s.count++
+	oldMean := s.mean
+	s.mean += (xf - s.mean) / float64(s.count)
+	s.meanSquared += (xf - s.mean) * (xf - oldMean)
 }
 
 func (s *stddev) Done() float64 {
-	return stat.PopStdDev(s.xs, nil)
+	if s.count < 2 {
+		return 0
+	}
+
+	return s.meanSquared / float64(s.count - 1)
 }
 
 type percentile struct {
