@@ -34,8 +34,8 @@ func (m *mode) Done() any {
 }
 
 type stddev struct {
-	mean float64
-	count int
+	mean        float64
+	count       int
 	meanSquared float64
 }
 
@@ -56,7 +56,7 @@ func (s *stddev) Done() float64 {
 		return 0
 	}
 
-	return s.meanSquared / float64(s.count - 1)
+	return s.meanSquared / float64(s.count-1)
 }
 
 type percentile struct {
