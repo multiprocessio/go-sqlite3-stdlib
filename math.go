@@ -23,6 +23,8 @@ func floaty(a any) float64 {
 		return float64(t)
 	case uint:
 		return float64(t)
+	case uint8:
+		return float64(t)
 	case uint16:
 		return float64(t)
 	case uint32:
